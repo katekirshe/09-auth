@@ -23,7 +23,7 @@ import { useNoteDraftStore } from "@/lib/store/noteStore";
 
 function NoteForm() {
   const { draft, setDraft, clearDraft } = useNoteDraftStore();
-  
+
   const queryClient = useQueryClient();
   const titleFieldId = useId();
   const contentFieldId = useId();
