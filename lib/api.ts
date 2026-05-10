@@ -5,7 +5,7 @@ export type TagSortBy = "created" | "updated";
 const authToken = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
 
 const instance = axios.create({
-  baseURL: "https://notehub-public.goit.study/api/",
+  baseURL: "https://notehub-api.goit.study/",
   headers: { Authorization: `Bearer ${authToken}` },
 });
 
