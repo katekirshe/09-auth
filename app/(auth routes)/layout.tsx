@@ -1,16 +1,25 @@
+"use client";
+
+import { useEffect, useState, startTransition } from "react";
+import { useRouter } from "next/navigation";
+
 type Props = {
   children: React.ReactNode;
-  sidebar: React.ReactNode;
 };
 
-const AuthLayout = (props: Props) => {
-  const { children } = props;
+export default function PublicLayout({ children }: Props) {
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
-  return (
-    <section>
-      <div>{children}</div>
-    </section>
-  );
-};
+  useEffect(() => {
+    // 1. Примусово оновлюємо серверні дані
+    router.refresh();
 
-export default AuthLayout;
+    // 2. Безпечно оновлюємо стан loading
+    startTransition(() => {
+      setLoading(false);
+    });
+  }, [router]);
+
+  return <>{loading ? <div>Loading...</div> : children}</>;
+}
