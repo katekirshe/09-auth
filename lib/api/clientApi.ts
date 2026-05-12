@@ -4,13 +4,6 @@ import { nextServer } from "./api";
 
 export type TagSortBy = "created" | "updated";
 
-//const authToken = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
-
-// const instance = axios.create({
-//   baseURL: "https://notehub-api.goit.study/",
-//   headers: { Authorization: `Bearer ${authToken}` },
-// });
-
 interface FetchNotesResponse {
   notes: Note[];
   totalPages: number;
