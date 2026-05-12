@@ -4,30 +4,21 @@ import { Metadata } from "next";
 import { getServerMe } from "@/lib/api/serverApi";
 import Link from "next/link";
 
-type NoteDetailsProps = {
-  params: Promise<{ id: string }>;
-};
-
-export async function generateMetadata({
-  params,
-}: NoteDetailsProps): Promise<Metadata> {
-  const { id } = await params;
-  const note = {
-    title: "",
-    content: "",
-  };
+export async function generateMetadata(): Promise<Metadata> {
+  const user = await getServerMe();
+  
   return {
-    title: note.title,
-    description: note.content.slice(0, 30),
+    title: user.username,
+    description: user.username.slice(0, 30),
     openGraph: {
-      title: note.title,
-      description: note.content.slice(0, 30),
+      title: user.username,
+      description: user.username.slice(0, 30),
       images: [
         {
           url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
           width: 1200,
           height: 630,
-          alt: note.title,
+          alt: user.username,
         },
       ],
     },
@@ -48,7 +39,7 @@ async function Profile() {
         </div>
         <div className={css.avatarWrapper}>
           <Image
-            src={user?.avatar || "/"}
+            src={user?.avatar || ""}
             alt="User Avatar"
             width={120}
             height={120}

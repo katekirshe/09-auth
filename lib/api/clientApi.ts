@@ -1,5 +1,5 @@
 import { Note, Tag } from "@/types/note";
-import { User } from "@/types/user";
+import { LoginRequest, RegisterRequest, User } from "@/types/user";
 import { nextServer } from "./api";
 
 export type TagSortBy = "created" | "updated";
@@ -22,7 +22,7 @@ export async function fetchNotes({
   page,
   sortBy,
 }: FetchNotesRequest): Promise<FetchNotesResponse> {
-  const response = await nextServer.get<FetchNotesResponse>("notes", {
+  const response = await nextServer.get<FetchNotesResponse>("/notes", {
     params: {
       search,
       tag,
@@ -36,7 +36,7 @@ export async function fetchNotes({
 }
 
 export async function fetchNoteById(id: string): Promise<Note> {
-  const response = await nextServer.get<Note>(`notes/${id}`);
+  const response = await nextServer.get<Note>(`/notes/${id}`);
   return response.data;
 }
 
@@ -47,30 +47,30 @@ export interface CreateNote {
 }
 
 export async function createNote(params: CreateNote): Promise<Note> {
-  const response = await nextServer.post<Note>("notes", params);
+  const response = await nextServer.post<Note>("/notes", params);
   return response.data;
 }
 
 export async function deleteNote(id: string): Promise<Note> {
-  const response = await nextServer.delete<Note>(`notes/${id}`);
+  const response = await nextServer.delete<Note>(`/notes/${id}`);
   return response.data;
 }
 
-export type RegisterRequest = {
-  email: string;
-  password: string;
-  userName: string;
-};
+// export type RegisterRequest = {
+//   email: string;
+//   password: string;
+//   username: string;
+// };
 
 export const register = async (data: RegisterRequest) => {
   const res = await nextServer.post<User>("/auth/register", data);
   return res.data;
 };
 
-export type LoginRequest = {
-  email: string;
-  password: string;
-};
+// export type LoginRequest = {
+//   email: string;
+//   password: string;
+// };
 
 export const login = async (data: LoginRequest) => {
   const res = await nextServer.post<User>("/auth/login", data);

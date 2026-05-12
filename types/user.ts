@@ -1,8 +1,20 @@
 export interface User {
-  id: string;
+ // id: string;
   email: string;
   username: string;
   avatar: string;
-  createdAt: Date;
-  updatedAt: Date;
+  // createdAt: Date;
+  // updatedAt: Date;
 }
+
+
+export type LoginRequest = {
+  email: string;
+  password: string;
+};
+
+export type RegisterRequest = {
+  email: string;
+  password: string;
+  username: string;
+};
