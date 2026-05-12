@@ -16,7 +16,7 @@ interface FetchNotesResponse {
   totalPages: number;
 }
 
-interface FetchNotesRequest {
+export interface FetchNotesRequest {
   search?: string;
   tag?: Tag;
   page?: number;
@@ -76,19 +76,8 @@ export const register = async (data: RegisterRequest) => {
 
 export type LoginRequest = {
   email: string;
-  https://www.edu.goit.global/uk/learn/35708654/48824017/48824056/homework
-  Під час створення Zustand-стору в TypeScript використовуйте подвійні дужки після create, інакше типи визначаться некоректно. Наприклад:
-
-create<AuthStore>()((set) => ({ ... }))
   password: string;
 };
-
-https://www.edu.goit.global/uk/learn/35708654/48824017/48824056/training?blockId=48824241
-/ увесь попередній код
-
-export const getMe = async () => {
-  const { data } = await nextServer.get<User>('/auth/me');
-  return data;
 
 export const login = async (data: LoginRequest) => {
   const res = await nextServer.post<User>("/auth/login", data);
@@ -107,4 +96,18 @@ export const checkSession = async () => {
 export const getMe = async () => {
   const { data } = await nextServer.get<User>("/users/me");
   return data;
+};
+
+export const logout = async (): Promise<void> => {
+  await nextServer.post("/auth/logout");
+};
+
+export type UpdateUserRequest = {
+  username?: string;
+};
+
+export const updateMe = async (payload: UpdateUserRequest) => {
+
+  const res = await nextServer.patch<User>("/users/me", payload);
+  return res.data;
 };

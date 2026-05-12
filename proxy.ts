@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { parse } from "cookie";
 import { checkServerSession } from "./lib/api/serverApi";
 
-const privateRoutes = ["/profile"];
+const privateRoutes = ["/profile", "/notes"];
 const publicRoutes = ["/sign-in", "/sign-up"];
 
 export async function proxy(request: NextRequest) {
@@ -62,11 +62,15 @@ export async function proxy(request: NextRequest) {
     // Якщо refreshToken або сесії немає:
     // публічний маршрут — дозволяємо доступ
     if (isPublicRoute) {
+      console.log(1);
+
       return NextResponse.next();
     }
 
     // приватний маршрут — редірект на сторінку входу
     if (isPrivateRoute) {
+      console.log(2);
+
       return NextResponse.redirect(new URL("/sign-in", request.url));
     }
   }
