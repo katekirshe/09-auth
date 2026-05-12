@@ -2,10 +2,11 @@
 
 import { ApiError } from "@/app/api/api";
 import css from "./SignInPage.module.css";
-import { login, LoginRequest } from "@/lib/api/clientApi";
+import { login } from "@/lib/api/clientApi";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/lib/store/authStore";
+import { LoginRequest } from "@/types/user";
 
 function SignInPage() {
   const router = useRouter();
